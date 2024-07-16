@@ -45,6 +45,41 @@ function changeTheme() {
       FOOD_COLOUR = "#77E4C8";
       FOOD_BORDER_COLOUR = "#36C2CE";
       break;
+    case "hell":
+      CANVAS_BACKGROUND_COLOUR = "#550000";
+      SNAKE_COLOUR = "#FF0000";
+      SNAKE_BORDER_COLOUR = "#AA0000";
+      FOOD_COLOUR = "#FF0000";
+      FOOD_BORDER_COLOUR = "#AA0000";
+      break;
+    case "army":
+      CANVAS_BACKGROUND_COLOUR = "#344E41";
+      SNAKE_COLOUR = "#A3B18A";
+      SNAKE_BORDER_COLOUR = "#DAD7CD";
+      FOOD_COLOUR = "#A3B18A";
+      FOOD_BORDER_COLOUR = "#DAD7CD";
+      break;
+    case "brownie":
+      CANVAS_BACKGROUND_COLOUR = "#D5BDAF";
+      SNAKE_COLOUR = "#F5EBE0";
+      SNAKE_BORDER_COLOUR = "#EDEDE9";
+      FOOD_COLOUR = "#F5EBE0";
+      FOOD_BORDER_COLOUR = "#EDEDE9";
+      break;
+    case "pinky":
+      CANVAS_BACKGROUND_COLOUR = "#FB6F92";
+      SNAKE_COLOUR = "#FFB3C6";
+      SNAKE_BORDER_COLOUR = "#FFC2D1";
+      FOOD_COLOUR = "#FFB3C6";
+      FOOD_BORDER_COLOUR = "#FFC2D1";
+      break;
+    case "ocean":
+      CANVAS_BACKGROUND_COLOUR = "#0B0771";
+      SNAKE_COLOUR = "#0F2AA8";
+      SNAKE_BORDER_COLOUR = "#1832BA";
+      FOOD_COLOUR = "#0F2AA8";
+      FOOD_BORDER_COLOUR = "#1832BA";
+      break;
   }
   previewCanvas();
 }
