@@ -12,6 +12,13 @@ const loseSound = document.getElementById("lose-sound");
 const startSound = document.getElementById("start-sound");
 const pauseSound = document.getElementById("pause-sound");
 const directionSound = document.getElementById("direction-sound");
+const playingSound = document.getElementById("playing-sound");
+playingSound.volume = 0.1;
+eatSound.volume = 0.1;
+loseSound.volume = 0.1;
+startSound.volume = 0.1;
+pauseSound.volume = 0.1;
+directionSound.volume = 0.1;
 
 function changeTheme() {
   const gameTheme = document.getElementById("game-theme");
@@ -128,6 +135,7 @@ document.addEventListener("keydown", changeDirection);
 
 function startGame() {
   if (gameStarted) return;
+  GAME_SPEED = 100;
   gameStarted = true;
   startSound.play();
   main();
@@ -144,11 +152,13 @@ function stopGame() {
   pauseButton.disabled = true;
   resetButton.disabled = false;
   pauseSound.play();
+  playingSound.pause();
 }
 
 function resetGame() {
   stopGame();
   startSound.play();
+  playingSound.pause();
   snake = [
     { x: 150, y: 150 },
     { x: 140, y: 150 },
@@ -161,7 +171,7 @@ function resetGame() {
   dy = 0;
   document.getElementById("score").innerHTML = score;
   previewCanvas();
-  resetButton.disabled = true; // Reset button is disabled after reset
+  resetButton.disabled = true;
 }
 
 function main() {
@@ -172,10 +182,13 @@ function main() {
     drawFood();
     advanceSnake();
     drawSnake();
+    playingSound.play();
+
     if (didGameEnd()) {
       loseSound.play();
       stopGame();
       showModal();
+      playingSound.stop();
     }
   }, GAME_SPEED);
 }
