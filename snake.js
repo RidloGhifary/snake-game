@@ -270,6 +270,7 @@ function changeDirection(event) {
   if (changingDirection) return;
   changingDirection = true;
 
+  directionSound.play();
   const keyPressed = event.keyCode;
 
   const goingUp = dy === 10;
@@ -278,22 +279,18 @@ function changeDirection(event) {
   const goingLeft = dx === -10;
 
   if (keyPressed === LEFT_KEY && !goingRight) {
-    directionSound.play();
     dx = -10;
     dy = 0;
   }
   if (keyPressed === UP_KEY && !goingDown) {
-    directionSound.play();
     dx = 0;
     dy = -10;
   }
   if (keyPressed === RIGHT_KEY && !goingLeft) {
-    directionSound.play();
     dx = 10;
     dy = 0;
   }
   if (keyPressed === DOWN_KEY && !goingUp) {
-    directionSound.play();
     dx = 0;
     dy = 10;
   }
