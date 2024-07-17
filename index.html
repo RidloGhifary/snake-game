@@ -27,7 +27,11 @@
       <button id="reset" onclick="resetGame()" disabled>Reset</button>
     </div>
     <canvas id="gameCanvas" width="500" height="500"></canvas>
-    <div id="score">0</div>
+
+    <div id="controls">
+      <span>Score: <strong id="score">0</strong></span>
+      <span>High Score: <strong id="highScore">0</strong></span>
+    </div>
 
     <audio id="eat-sound" src="assets/music/eat.mp3"></audio>
     <audio id="lose-sound" src="assets/music/lose.wav"></audio>

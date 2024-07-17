@@ -19,7 +19,8 @@ body {
   margin-top: 20px;
 }
 
-#score {
+#score,
+#controls {
   text-align: center;
   font-size: 40px;
   font-family: "Antic Slab", serif;

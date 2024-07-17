@@ -107,6 +107,9 @@ let snake = [
 
 let gameStarted = false;
 let score = 0;
+let highScore = localStorage.getItem("highScore")
+  ? parseInt(localStorage.getItem("highScore"))
+  : 0;
 let changingDirection = false;
 let foodX;
 let foodY;
@@ -159,6 +162,7 @@ function resetGame() {
   dx = 10;
   dy = 0;
   document.getElementById("score").innerHTML = score;
+  document.getElementById("highScore").innerHTML = highScore;
   createFood();
   previewCanvas();
   resetButton.disabled = true;
@@ -176,9 +180,15 @@ function main() {
 
     if (didGameEnd()) {
       loseSound.play();
+      playingSound.pause();
+      if (score > highScore) {
+        highScore = score;
+        localStorage.setItem("highScore", highScore);
+      }
       stopGame();
       showModal();
-      playingSound.pause();
+      resetGame();
+      GAME_SPEED = 100;
     }
   }, GAME_SPEED);
 }
@@ -207,6 +217,11 @@ function advanceSnake() {
     score += 10;
     GAME_SPEED -= 2;
     document.getElementById("score").innerHTML = score;
+    if (score > highScore) {
+      highScore = score;
+      localStorage.setItem("highScore", highScore);
+      document.getElementById("highScore").innerHTML = highScore;
+    }
     createFood();
   } else {
     snake.pop();
@@ -235,8 +250,8 @@ function createFood() {
   foodY = randomTen(0, gameCanvas.height - 10);
 
   snake.forEach(function isFoodOnSnake(part) {
-    const foodIsoNsnake = part.x == foodX && part.y == foodY;
-    if (foodIsoNsnake) createFood();
+    const foodIsOnSnake = part.x == foodX && part.y == foodY;
+    if (foodIsOnSnake) createFood();
   });
 }
 
@@ -301,3 +316,4 @@ function playAgain() {
 }
 
 previewCanvas();
+document.getElementById("highScore").innerHTML = highScore;
