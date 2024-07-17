@@ -106,40 +106,29 @@ let snake = [
 ];
 
 let gameStarted = false;
-// The user's score
 let score = 0;
-// When set to true the snake is changing direction
 let changingDirection = false;
-// Food x-coordinate
 let foodX;
-// Food y-coordinate
 let foodY;
-// Horizontal velocity
 let dx = 10;
-// Vertical velocity
 let dy = 0;
 
-// Get the canvas element
 const gameCanvas = document.getElementById("gameCanvas");
 const startButton = document.getElementById("start");
 const pauseButton = document.getElementById("pause");
 const resetButton = document.getElementById("reset");
 const modal = document.getElementById("gameOverModal");
 const finalScore = document.getElementById("finalScore");
-const closeModalSpan = document.getElementsByClassName("close")[0];
-// Return a two dimensional drawing context
 const ctx = gameCanvas.getContext("2d");
 
-// Call changeDirection whenever a key is pressed
 document.addEventListener("keydown", changeDirection);
 
 function startGame() {
   if (gameStarted) return;
-  GAME_SPEED = 100;
   gameStarted = true;
   startSound.play();
-  main();
   createFood();
+  main();
   startButton.disabled = true;
   pauseButton.disabled = false;
   resetButton.disabled = false;
@@ -170,6 +159,7 @@ function resetGame() {
   dx = 10;
   dy = 0;
   document.getElementById("score").innerHTML = score;
+  createFood();
   previewCanvas();
   resetButton.disabled = true;
 }
@@ -188,7 +178,7 @@ function main() {
       loseSound.play();
       stopGame();
       showModal();
-      playingSound.stop();
+      playingSound.pause();
     }
   }, GAME_SPEED);
 }
@@ -262,35 +252,34 @@ function drawSnakePart(snakePart) {
 }
 
 function changeDirection(event) {
-  const LEFT_KEY = 65 || 37;
-  const RIGHT_KEY = 68 || 39;
-  const UP_KEY = 87 || 38;
-  const DOWN_KEY = 83 || 40;
+  const LEFT_KEY = event.code === "ArrowLeft" || event.code === "KeyA";
+  const RIGHT_KEY = event.code === "ArrowRight" || event.code === "KeyD";
+  const UP_KEY = event.code === "ArrowUp" || event.code === "KeyW";
+  const DOWN_KEY = event.code === "ArrowDown" || event.code === "KeyS";
 
   if (changingDirection) return;
   changingDirection = true;
 
   directionSound.play();
-  const keyPressed = event.keyCode;
 
   const goingUp = dy === 10;
   const goingDown = dy === -10;
   const goingRight = dx === 10;
   const goingLeft = dx === -10;
 
-  if (keyPressed === LEFT_KEY && !goingRight) {
+  if (LEFT_KEY && !goingRight) {
     dx = -10;
     dy = 0;
   }
-  if (keyPressed === UP_KEY && !goingDown) {
+  if (UP_KEY && !goingDown) {
     dx = 0;
     dy = -10;
   }
-  if (keyPressed === RIGHT_KEY && !goingLeft) {
+  if (RIGHT_KEY && !goingLeft) {
     dx = 10;
     dy = 0;
   }
-  if (keyPressed === DOWN_KEY && !goingUp) {
+  if (DOWN_KEY && !goingUp) {
     dx = 0;
     dy = 10;
   }
